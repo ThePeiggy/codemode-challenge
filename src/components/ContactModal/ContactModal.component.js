@@ -34,20 +34,20 @@ class ContactModal extends Component {
     if (this.props.modalOpen) return this.renderModal();
     else return (null);
   }
-  
+
   componentDidUpdate(prevProps) {
     if (prevProps.modalOpen != this.props.modalOpen && this.props.modalOpen){
       setTimeout(() => {
         this.setState({
           opacity:1
         });
-      },0); //settimeout 0 so that the opacity isnt set parallel to the modal opening 
+      },0); //settimeout 0 so that the opacity isnt set parallel to the modal opening
     }else if (prevProps.submitted != this.props.submitted && this.props.submitted){
       setTimeout(() => {
         this.setState({
           contentOpacity:1
         });
-      },0); 
+      },0);
     }
   }
 
@@ -67,8 +67,8 @@ class ContactModal extends Component {
       return (
         <div className="contents-container submitted">
           <div className="modal-header">
-            <div className="header-title">Let's chat soon!</div>
-            <div className="header-subtitle">Your request has been received. We'll be in touch with you shortly.</div>
+            <div className="header-title">Let‎’s chat soon!</div>
+            <div className="header-subtitle">Your request has been received. We‎’ll be in touch with you shortly.</div>
           </div>
         </div>
       )
@@ -76,7 +76,7 @@ class ContactModal extends Component {
       return (
         <div className="contents-container">
           <div className="modal-header">
-            <div className="header-title">LET'S WORK TOGETHER</div>
+            <div className="header-title">LET‎’S WORK TOGETHER</div>
             <div className="header-subtitle">Start a project or conversation.</div>
           </div>
           { this.renderError() }
@@ -93,7 +93,7 @@ class ContactModal extends Component {
       </div>
     );
   }
-  
+
   renderSubmit(){ //submit button has 4 different states
     if(this.state.submitState === "loading"){
       return(
@@ -112,7 +112,7 @@ class ContactModal extends Component {
             <div className={"checkmark"}></div>
           </div>
         </div>);
-    }else if(this.state.submitState === "error"){ 
+    }else if(this.state.submitState === "error"){
       return(
         <div className={"submit-button-container error-animation"} onAnimationEnd={(event) => {this.setState({submitState: "default"})}} >
           <input type="submit" className="submit-button" value="SUBMIT"onClick={this.submit.bind(this)} />
@@ -219,7 +219,7 @@ class ContactModal extends Component {
                     submitState: "default"
                   });
                 },300) // 300ms to fade content out
-              }); 
+              });
             },1000); // 1s after the checkmark animation starts to play
           });
         },0);
