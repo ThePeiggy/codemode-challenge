@@ -146,9 +146,7 @@ class ContactModal extends Component {
   submit(event) {
     event.preventDefault();
     if (this.validateInputs()) {
-      console.log("A")
       this.setState({isSubmitting:true})
-      console.log("B")
       projectRequestsService.createProjectRequest({
         name: this.props.name,
         company: this.props.company,
@@ -159,11 +157,8 @@ class ContactModal extends Component {
         description: this.props.description,
         marketing: this.props.marketing,
       }).then(() => {
-        console.log("C")
         this.setState({isSubmitting:false})
-        console.log("D")
         this.props.setSubmitted();
-        console.log("e")
         this.props.clearForm();
       }).catch((error) => {
         this.setState({isSubmitting:false})
