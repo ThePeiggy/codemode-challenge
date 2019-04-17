@@ -21,6 +21,10 @@ import {
 import projectRequestsService from 'services/projectRequests.service';
 
 class ContactModal extends Component {
+  state = {
+    isSubmitting: false,
+  }
+
   render() {
     if (this.props.modalOpen) return this.renderModal();
     else return (null);
@@ -124,11 +128,16 @@ class ContactModal extends Component {
               onChange={this.setMarketing.bind(this)} />
             <label className="marketing-label" htmlFor="marketing">Sign me up for the latest news.</label>
           </div>
-          <input
+          <div>
+          {this.state.isSubmitting ?
+            <div className="lds-dual-ring"></div>
+          : <input
             type="submit"
             className="submit-button"
             value="SUBMIT"
             onClick={this.submit.bind(this)} />
+          }
+          </div>
         </div>
       </form>
     );
@@ -137,6 +146,9 @@ class ContactModal extends Component {
   submit(event) {
     event.preventDefault();
     if (this.validateInputs()) {
+      console.log("A")
+      this.setState({isSubmitting:true})
+      console.log("B")
       projectRequestsService.createProjectRequest({
         name: this.props.name,
         company: this.props.company,
@@ -147,9 +159,14 @@ class ContactModal extends Component {
         description: this.props.description,
         marketing: this.props.marketing,
       }).then(() => {
+        console.log("C")
+        this.setState({isSubmitting:false})
+        console.log("D")
         this.props.setSubmitted();
+        console.log("e")
         this.props.clearForm();
       }).catch((error) => {
+        this.setState({isSubmitting:false})
         if (error && error.response && error.response.status === 422) {
           alert('Your email is invalid. Please use a valid email.');
         } else {
